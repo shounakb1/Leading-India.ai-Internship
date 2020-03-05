@@ -1,0 +1,144 @@
+{% extends "news.html" %}
+
+{% block main %}
+	<div id="piechart"></div>
+	<p id="info" style="text-align: center;"> Here are some most impactful positive and negative news extracted by our system. Click on the title to go to the news report.</p>
+	<div>
+		<table id="table_data1" class="mytable">
+			<caption>Positive news</caption>
+			<col width="30%">
+  			<col width="70%">
+			<tr>
+				<th> Author </th>
+				<th> Title </th>
+			</tr>
+			<tbody>
+				{% for i in range(0,news_display_pos) %}
+				<tr>
+					<td class="cell">{{ (pos_n[i]).author }}</td>
+					<td> <a href="{{ (pos_n[i]).url }}" target="_blank"> {{ (pos_n[i]).title }} </a> </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<table id="table_data2" class="mytable">
+			<caption>Negative news</caption>
+			<col width="30%">
+  			<col width="70%">
+			<tr>
+				<th> Author </th>
+				<th> Title </th>
+			</tr>
+			<tbody>
+				{% for i in range(0,news_display_neg) %}
+				<tr>
+					<td class="cell">{{ (neg_n[i]).author }}</td>
+					<td> <a href="{{ (neg_n[i]).url }}" target="_blank">{{ (neg_n[i]).title }} </a> </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div>
+		<div class="heading_more_pos">
+		  	<h2> Reputation Manager - Analyse News </h2>
+		  	<p> You can view all the positive news here which were extracted by our system. The news are sorted based on positivity. The top most news is most positive news and last news is least positive. </p>
+		  	<p> Click on the title to go to the news report. </p>
+		</div>
+		<table id="mytableviewmore_posid" class="mytableviewmore_pos">
+			<caption>Positive News</caption>
+			<col width="10%">
+			<col width="14%">
+  			<col width="20%">
+  			<col width="48%">
+  			<col width="8%">
+  			<tr>
+				<th> Source </th>
+				<th> Author </th>
+				<th> Title </th>
+				<th> Description </th>
+				<th> Score </th>
+			</tr>
+			<tbody>
+				{% for item in pos_n %}
+				<tr>
+					<td class="cell">{{ item.source.name }} </td>
+					<td> {{ item.author }} </td>
+					<td> <a href="{{ item.url }}" target="_blank"> {{ item.title}} </a> </td>
+					<td> {{ item.description }}
+					<td> {{ item.score}} </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="heading_more_neg">
+		  	<h2> Reputation Manager - Analyse News </h2>
+		  	<p> You can view all the negative news here which were extracted by our system. The news are sorted based on negativity. The top most news is most negative comment and last news is least negative. </p>
+		  	<p> Click on the title to go to the news report. </p>
+		</div>
+		<table id="mytableviewmore_negid"class="mytableviewmore_neg">
+			<caption>Negative News</caption>
+			<col width="10%">
+			<col width="14%">
+  			<col width="20%">
+  			<col width="48%">
+  			<col width="8%">
+  			<tr>
+				<th> Source </th>
+				<th> Author </th>
+				<th> Title </th>
+				<th> Description </th>
+				<th> Score </th>
+			</tr>
+			<tbody>
+				{% for item in neg_n %}
+				<tr>
+					<td class="cell">{{ item.source.name }} </td>
+					<td> {{ item.author }} </td>
+					<td> <a href="{{ item.url }}" target="_blank"> {{ item.title}} </a> </td>
+					<td> {{ item.description }}
+					<td> {{ item.score}} </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="heading_more_neu">
+		  	<h2> Reputation Manager - Analyse News </h2>
+		  	<p> You can view all the Neutral news here which were extracted by our system. The news are sorted based on negativity.</p>
+		  	<p> Click on the title to go to the news report. </p>
+		</div>
+		<table id="mytableviewmore_neuid" class="mytableviewmore_neu">
+			<caption>Neutral News</caption>
+			<col width="10%">
+			<col width="14%">
+  			<col width="20%">
+  			<col width="48%">
+  			<col width="8%">
+  			<tr>
+				<th> Source </th>
+				<th> Author </th>
+				<th> Title </th>
+				<th> Description </th>
+				<th> Score </th>
+			</tr>
+			<tbody>
+				{% for item in neu_n %}
+				<tr>
+					<td class="cell">{{ item.source.name }} </td>
+					<td> {{ item.author }} </td>
+					<td> <a href="{{ item.url }}" target="_blank"> {{ item.title}} </a> </td>
+					<td> {{ item.description }}
+					<td> {{ item.score}} </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="view_more_buttons">
+		<button class="extra_buttons" id="pos_view_more"> All positive News </button>
+		<button class="extra_buttons" id="neg_view_more"> All negative News </button>
+		<button class="extra_buttons" id="neu_view_more"> All neutral News </button>
+		<button class="extra_buttons" id="go_back"> Go back </button>
+	</div>
+{% endblock %}

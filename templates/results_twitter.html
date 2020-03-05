@@ -1,0 +1,106 @@
+{% extends "twitter.html" %}
+
+{% block main %}
+	<div id="piechart"></div>
+	<p id="info" style="text-align: center;"> Here are some most impactful positive and negative comments extracted by our system.</p>
+	
+	<div>
+		<table id="table_data1" class="mytable">
+			<caption>Positive Comments</caption>
+			<col width="30%">
+  			<col width="70%">
+			<tr>
+				<th> Name </th>
+				<th> Tweet </th>
+			</tr>
+			<tbody>
+				{% for i in range(0,tweet_display_pos) %}
+				<tr>
+					<td class="cell">{{ (pos[i]).username }}</td>
+					<td> {{ (pos[i]).tweet }} </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<table id="table_data2" class="mytable">
+			<caption>Negative Comments</caption>
+			<col width="30%">
+  			<col width="70%">
+			<tr>
+				<th> Name </th>
+				<th> Tweet </th>
+			</tr>
+			<tbody>
+				{% for i in range(0,tweet_display_neg) %}
+				<tr>
+					<td class="cell">{{ (neg[i]).username }}</td>
+					<td> {{ (neg[i]).tweet }} </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div>
+		<div class="heading_more_pos">
+		  	<h2> Reputation Manager - Analyse Tweets </h2>
+		  	<p> You can view all the positive comments here which were extracted by our system. The comments are sorted based on positivity. The top most comment is most positive comment and last comment is least positive. </p>
+		</div>
+		<table id="mytableviewmore_posid" class="mytableviewmore_pos">
+			<caption>Positive Comments</caption>
+			<col width="12%">
+  			<col width="68%">
+  			<col width="12%">
+  			<col width="8%">
+  			<tr>
+				<th> Name </th>
+				<th> Tweet </th>
+				<th> Location </th>
+				<th> Score </th>
+			</tr>
+			<tbody>
+				{% for item in pos %}
+				<tr>
+					<td class="cell">{{ item.username }} </td>
+					<td> {{ item.tweet }} </td>
+					<td> {{ item.location}} </td>
+					<td> {{ item.score}} </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="heading_more_neg">
+		  	<h2> Reputation Manager - Analyse Tweets </h2>
+		  	<p> You can view all the negative comments here which were extracted by our system. The comments are sorted based on negativity. The top most comment is most negative comment and last comment is least negative. </p>
+		</div>
+		<table id="mytableviewmore_negid"class="mytableviewmore_neg">
+			<caption>Negative Comments</caption>
+			<col width="12%">
+  			<col width="68%">
+  			<col width="12%">
+  			<col width="8%">
+  			<tr>
+				<th> Name </th>
+				<th> Tweet </th>
+				<th> Location </th>
+				<th> Score </th>
+			</tr>
+			<tbody>
+				{% for item in neg %}
+				<tr>
+					<td class="cell"> {{ item.username }}  </td>
+					<td> {{ item.tweet }} </td>
+					<td> {{ item.location}} </td>
+					<td> {{ item.score }} </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="view_more_buttons">
+		<button class="extra_buttons" id="pos_view_more"> All positive reviews </button>
+		<button class="extra_buttons" id="neg_view_more"> All negative reviews </button>
+		<button class="extra_buttons" id="go_back"> Go back </button>
+	</div>
+
+{% endblock %}

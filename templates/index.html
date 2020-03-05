@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="static/styleMain.css">
+	<title> Index </title>
+	</head>
+	<body>
+
+		<div class="sidebar">
+		  <a class="active" href="{{ url_for('index')}}">Home</a>
+		  <a href="{{ url_for('twitter')}}">Tweets</a>
+		  <a href="{{ url_for('youtube')}}">Youtube Comments</a>
+		  <a href="{{ url_for('news')}}">News</a>
+		  <a href="{{ url_for('contact') }}">Contact</a>
+		  <a href="{{ url_for('about') }}">About</a>
+		</div>
+
+		<div class="content">
+		  <div class="heading">
+		  	<h2> Reputation Manager </h2>
+		  	<p> This application lets you analyse your company's or product's market reputation. </p>
+		  	<p> You can choose a particular platform to analyse market Reputation </p>
+		  <div>
+		</div>
+
+	</body>
+</html>

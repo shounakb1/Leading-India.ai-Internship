@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="static/styleMain.css">
+	<title> News </title>
+	</head>
+	<body>
+		<div class="sidebar">
+		  <a href="{{ url_for('index')}}">Home</a>
+		  <a href="{{ url_for('twitter')}}">Tweets</a>
+		  <a href="{{ url_for('youtube')}}">Youtube Comments</a>
+		  <a class="active" href="{{ url_for('news')}}">News</a>
+		  <a href="{{ url_for('contact') }}">Contact</a>
+		  <a href="{{ url_for('about') }}">About</a>
+		</div>
+		<div class="content">
+		 	<div class="heading">
+		  		<h2> Reputation Manager - Analyse News </h2>
+		  		<p> Hey there, this page lets you analyse your company's or product's market reputation specifically from various news webistes (eg Times of India, etc). Simply enter a keyword in the text box below and hit the search button to analyse. </p>
+		  		<p> You can also choose a particular platform to analyse market Reputation </p>
+		  	</div>
+		  	<div class="searchform">
+			  	<form action="{{ url_for('news') }}" id="news_form" method="post">
+			  		<h4> Enter a Keyword related to the product/brand/company you want to search for.</h4>
+	  				<input type="text" id="search" name="search" placeholder="Search.."/>
+	  				<br> </br>
+	  				<input id="searchbtn" name="searchbtn" type="submit" value="Analyse"/>
+				</form>
+		  	</div>
+			<main>
+				{% block main %}{% endblock %}
+			</main>
+		</div>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			var form = document.getElementById('twitter_form');
+			form.onsubmit = function() {
+				var tf = true;
+				if(form.search.value == '')
+				{
+					document.getElementById("search").style.borderColor="#ff1a1a";
+					tf = false;
+				}
+				return tf;
+			};
+		</script>
+		<script>
+			$(document).ready(function(){
+				$('.mytableviewmore_pos').hide();
+				$('.mytableviewmore_neg').hide();
+				$('.mytableviewmore_neu').hide();
+				$('#go_back').hide();
+				$(".heading_more_neg").hide();
+				$(".heading_more_pos").hide();
+				$(".heading_more_neu").hide();
+			  	$("#pos_view_more").click(function(){
+			    	$(".searchform").hide();
+			   		$(".heading").hide();
+			    	$("#table_data1").hide();
+			    	$("#table_data2").hide();
+			    	$('#go_back').show();
+			    	$("#neg_view_more").hide();
+			    	$("#pos_view_more").hide();
+			    	$("#neu_view_more").hide();
+			    	$('.mytableviewmore_pos').show();
+			    	$('#piechart').hide();
+			    	$('html,body').scrollTop(0);
+			    	$(".heading_more_pos").show();
+			    	$('#info').hide();
+			  	});
+			  	$("#neg_view_more").click(function(){
+			    	$(".searchform").hide();
+			   		$(".heading").hide();
+			    	$("#table_data1").hide();
+			    	$("#table_data2").hide();
+			    	$('#go_back').show();
+			    	$("#neg_view_more").hide();
+			    	$("#pos_view_more").hide();
+			    	$("#neu_view_more").hide();
+			    	$('.mytableviewmore_neg').show();
+			    	$('#piechart').hide();
+			    	$('html,body').scrollTop(0);
+			    	$(".heading_more_neg").show();
+			    	$('#info').hide();
+			  	});
+			  	$("#neu_view_more").click(function(){
+			    	$(".searchform").hide();
+			   		$(".heading").hide();
+			    	$("#table_data1").hide();
+			    	$("#table_data2").hide();
+			    	$('#go_back').show();
+			    	$("#neg_view_more").hide();
+			    	$("#pos_view_more").hide();
+			    	$("#neu_view_more").hide();
+			    	$('.mytableviewmore_neu').show();
+			    	$('#piechart').hide();
+			    	$('html,body').scrollTop(0);
+			    	$(".heading_more_pos").show();
+			    	$('#info').hide();
+			  	});
+			  	$("#go_back").click(function(){
+			  		$(".searchform").show();
+			    	$(".heading").show();
+			    	$("#table_data1").show();
+			    	$("#table_data2").show();
+			    	$('#go_back').hide();
+			    	$("#pos_view_more").show();
+			    	$("#neg_view_more").show();
+			    	$("#neu_view_more").show();
+			    	$('.mytableviewmore_pos').hide();
+			    	$('.mytableviewmore_neg').hide();
+			    	$('.mytableviewmore_neu').hide();
+			    	$('#piechart').show();
+			    	$(".heading_more_pos").hide();
+			    	$(".heading_more_neg").hide();
+			    	$(".heading_more_neu").hide();
+			    	$('html,body').scrollTop(0);
+			    	$('#info').show();
+			  	});
+			});
+		</script>
+		<script type="text/javascript">
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+			var pos = document.getElementById("mytableviewmore_posid").rows.length;
+			var neg = document.getElementById("mytableviewmore_negid").rows.length;
+			var neu = document.getElementById("mytableviewmore_neuid").rows.length;
+			function drawChart() {
+				var data = google.visualization.arrayToDataTable([
+					['News-type', 'Number of news'],
+					['Positive News', pos],
+					['Negative News', neg],
+					['Neutral News', neu],
+				]);
+				var options = {'title':'%age of +ve and -ve comments', 'width':550, 'height':400};
+				var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+	  			chart.draw(data, options);
+			}
+		</script>
+	</body>
+</html>
